@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, Car, MapPin, Smartphone, CreditCard, Banknote, Landmark, Smartphone as UpiIcon } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Car, MapPin, CreditCard, Banknote, Landmark, Smartphone as UpiIcon } from 'lucide-react';
 import styles from './ConfirmParking.module.scss';
 
 const ConfirmParking = () => {

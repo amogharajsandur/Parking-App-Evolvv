@@ -29,8 +29,8 @@
     }
 
     &.active {
-      color: var(--role-primary, $primary);
-      background: var(--role-secondary, $primary-light);
+      @include role-theme('color', 'primary');
+      @include role-theme('background', 'secondary');
       
       span {
         font-weight: 700;

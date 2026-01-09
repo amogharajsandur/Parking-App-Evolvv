@@ -46,9 +46,37 @@
   }
 }
 
+// --- Theming Mixin ---
+@mixin role-theme($prop: background, $type: 'primary') {
+  // Default (User)
+  @if $type == 'primary' {
+    #{$prop}: $user-role;
+  } @else if $type == 'secondary' {
+    #{$prop}: #eff6ff; 
+  }
+
+  // Role Overrides
+  :global(body.role-user) & {
+    @if $type == 'primary' { #{$prop}: $user-role; }
+    @else if $type == 'secondary' { #{$prop}: #eff6ff; }
+  }
+  :global(body.role-manager) & {
+    @if $type == 'primary' { #{$prop}: $manager-role; }
+    @else if $type == 'secondary' { #{$prop}: #ecfdf5; }
+  }
+  :global(body.role-driver) & {
+    @if $type == 'primary' { #{$prop}: $driver-role; }
+    @else if $type == 'secondary' { #{$prop}: #fffbeb; } // Amber-50
+  }
+  :global(body.role-admin) & {
+    @if $type == 'primary' { #{$prop}: $admin-role; }
+    @else if $type == 'secondary' { #{$prop}: #f3e8ff; }
+  }
+}
+
 // --- Glassmorphism Header ---
 @mixin glass-header {
-  background: var(--role-primary, $primary);
+  @include role-theme('background', 'primary'); // Use mixin instead of var()
   padding: 60px $spacing-lg $spacing-xl; // Taller header for mobile feel
   border-radius: 0 0 40px 40px;
   color: white;

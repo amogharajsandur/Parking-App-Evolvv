@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .ticketPage {
   @include container-base;
@@ -58,7 +58,11 @@
       margin-bottom: $spacing-xl;
       .systemName { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 6px; font-weight: 800; letter-spacing: 1px; }
       h3 { font-size: 22px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-      .locBadge { color: var(--role-primary, $primary); font-weight: 700; font-size: 15px; }
+      .locBadge { 
+        @include role-theme('color', 'primary');
+        font-weight: 700; 
+        font-size: 15px; 
+      }
     }
 
     .qrWrapper {
@@ -125,7 +129,8 @@
     box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
 
     .retrieveBtn, .confirmBtn {
-      @include premium-button(var(--role-primary, $primary));
+      @include premium-button;
+      @include role-theme('background', 'primary');
       width: 100%;
       justify-content: center;
     }
@@ -133,7 +138,7 @@
 
   // --- Retrieval Styles ---
   .retrievalCard {
-    background: var(--role-primary, $warning);
+    @include role-theme('background', 'primary');
     border-radius: 24px;
     padding: $spacing-xl;
     color: white;
@@ -204,7 +209,9 @@
           &::after { background: $success; }
         }
         &.active {
-          .trackIcon { color: var(--role-primary, $warning); }
+          .trackIcon { 
+            @include role-theme('color', 'primary');
+          }
           h4 { color: #1e293b; }
         }
         &.pending {

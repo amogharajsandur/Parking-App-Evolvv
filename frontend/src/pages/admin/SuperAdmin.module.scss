@@ -1,8 +1,16 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .adminPage {
   @include container-base;
+
+  @include desktop {
+    max-width: 480px; // Keep strict emulation width for clean desktop view
+    margin: 0 auto;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    height: 100vh;
+  }
   background: #f8fafc; // Lighter background for admin dashboard clean look
 
   .adminHeader {
@@ -77,6 +85,10 @@
       border: 1px solid #e2e8f0;
       box-shadow: $shadow-sm;
       cursor: pointer;
+
+      .mapPin {
+        @include role-theme('color', 'primary');
+      }
       
       span { flex: 1; font-weight: 600; color: #1e293b; font-size: 14px; }
     }

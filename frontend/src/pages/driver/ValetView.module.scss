@@ -1,8 +1,16 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .valetPage {
   @include container-base;
+
+  @include desktop {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    height: 100vh;
+  }
 
   .loadingOverlay {
     position: absolute;
@@ -31,8 +39,8 @@
         height: 64px;
         background: #eef2ff;
         border-radius: 50%;
-        color: var(--role-primary, $primary);
         @include flex;
+        @include role-theme('color', 'primary');
         margin-bottom: 8px;
       }
 
@@ -50,7 +58,8 @@
 
         .progressFill {
           height: 100%;
-          background: var(--role-primary, $primary);
+          height: 100%;
+          @include role-theme('background', 'primary');
           width: 0%;
           border-radius: 4px;
           animation: progressFill 2s linear forwards;
@@ -65,7 +74,7 @@
 
   .valetHeader {
     @include glass-header;
-    background: var(--role-primary, $driver-role); // Fallback or strict
+    // background handled by mixin inside glass-header
     
     .top {
       @include flex(space-between, center);
@@ -106,8 +115,10 @@
           width: 18px;
           height: 18px;
           border-radius: 50%;
+          border-radius: 50%;
           @include flex;
-          border: 2px solid var(--role-primary, $primary);
+          border: 2px solid;
+          @include role-theme('border-color', 'primary');
           font-weight: 800;
         }
       }
@@ -155,6 +166,11 @@
       @include flex(flex-start, center, row, 10px);
       margin-bottom: $spacing-md;
       padding-left: 4px;
+      
+      .bellIcon { 
+        @include role-theme('color', 'primary');
+      }
+
       h3 { font-size: 15px; font-weight: 700; color: #334155; }
     }
 

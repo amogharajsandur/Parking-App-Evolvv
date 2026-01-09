@@ -1,8 +1,16 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .homePage {
   @include container-base;
+  
+  @include desktop {
+    max-width: 480px; // Mobile emulation limit on desktop for consistent look, or remove for full width
+    margin: 0 auto;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    height: 100vh;
+  }
 
   .homeHeader {
     @include glass-header;
@@ -61,8 +69,8 @@
 
     .scanParkCard {
       @include flex(flex-start, center, row, $spacing-lg);
-      background: var(--role-secondary, #eff6ff);
-      border: 1px solid var(--role-primary, #3b82f6);
+      @include role-theme('background', 'secondary');
+      @include role-theme('border-color', 'primary');
       border-radius: $radius-xl;
       padding: $spacing-lg;
       cursor: pointer;
@@ -77,7 +85,7 @@
       .qrIconBg {
         width: 64px;
         height: 64px;
-        background: var(--role-primary, #3b82f6);
+        @include role-theme('background', 'primary');
         border-radius: $radius-lg;
         @include flex;
         color: white;
@@ -117,7 +125,7 @@
           background: $bg-light;
           border-radius: 12px;
           @include flex;
-          color: var(--role-primary, $primary);
+          @include role-theme('color', 'primary');
           flex-shrink: 0;
         }
 

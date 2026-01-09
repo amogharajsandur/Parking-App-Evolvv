@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useRole } from '../context/RoleContext';
+import { useRole } from '../../context/RoleContext';
 import { ArrowLeft, MapPin, ChevronDown, Ticket, Landmark, Database, Users, Building } from 'lucide-react';
-import API_BASE_URL from '../config';
+import API_BASE_URL from '../../config';
 import styles from './SuperAdmin.module.scss';
 
 const SuperAdmin = () => {
@@ -219,7 +219,7 @@ const SuperAdmin = () => {
             <section className={styles.siteSelector}>
               <p>Select Site</p>
               <div className={styles.selectBox}>
-                <MapPin size={18} color="var(--role-primary)" />
+                <MapPin size={18} className={styles.mapPin} />
                 <select 
                     value={selectedSite} 
                     onChange={(e) => setSelectedSite(e.target.value)}

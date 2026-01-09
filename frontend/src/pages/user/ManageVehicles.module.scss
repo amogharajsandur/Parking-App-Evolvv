@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .manageVehiclesPage {
   @include container-base;
@@ -43,10 +43,11 @@
       .vIcon {
         width: 56px;
         height: 56px;
-        background: var(--role-secondary, $primary-light);
+        height: 56px;
+        @include role-theme('background', 'secondary');
         border-radius: 16px;
         @include flex;
-        color: var(--role-primary, $primary);
+        @include role-theme('color', 'primary');
         border: 1px solid rgba(0,0,0,0.03);
       }
 
@@ -75,7 +76,13 @@
 
         &:first-child { border-right: 1px solid #f8fafc; }
         
-        &.edit { color: #64748b; &:hover { background: #f8fafc; color: var(--role-primary, $primary); } }
+        &.edit { 
+          color: #64748b; 
+          &:hover { 
+            background: #f8fafc; 
+            @include role-theme('color', 'primary');
+          } 
+        }
         &.remove { color: $danger; &:hover { background: $danger-light; } }
         
         &:active { background: rgba(0,0,0,0.02); }
@@ -84,7 +91,8 @@
   }
 
   .addVehicleBtn {
-    @include premium-button(var(--role-primary, $primary));
+    @include premium-button;
+    @include role-theme('background', 'primary');
     width: 100%;
     margin-top: $spacing-md;
     justify-content: center;

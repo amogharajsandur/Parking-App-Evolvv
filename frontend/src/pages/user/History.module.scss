@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .historyPage {
   @include container-base;
@@ -154,21 +154,28 @@
           @include flex(space-between, center);
           border: 1px solid #e2e8f0;
           span { font-size: 13px; color: #64748b; font-weight: 600; }
-          .time { font-weight: 800; color: var(--role-primary, $primary); }
+          .time { 
+            font-weight: 800; 
+            @include role-theme('color', 'primary');
+          }
         }
       }
 
       .downloadBtn {
-        @include premium-button(var(--role-primary, $primary));
+        @include premium-button;
+        @include role-theme('background', 'primary');
         width: 100%;
         justify-content: center;
       }
     }
 
     &.expanded {
-      border-color: var(--role-primary, $primary);
+      @include role-theme('border-color', 'primary');
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-      .arrow { transform: rotate(180deg); color: var(--role-primary, $primary); }
+      .arrow { 
+        transform: rotate(180deg); 
+        @include role-theme('color', 'primary');
+      }
     }
   }
 }

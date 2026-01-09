@@ -1,8 +1,16 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .dashboardContainer {
   @include container-base;
+
+  @include desktop {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    height: 100vh;
+  }
 
   .dashboardHeader {
     @include glass-header;

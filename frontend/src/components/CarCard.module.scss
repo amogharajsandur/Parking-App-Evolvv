@@ -12,10 +12,10 @@
     .iconBox {
       width: 44px;
       height: 44px;
-      background: var(--role-secondary, $primary-light);
+      @include role-theme('background', 'secondary');
       border-radius: 12px;
       @include flex;
-      color: var(--role-primary, $primary);
+      @include role-theme('color', 'primary');
     }
 
     .info {

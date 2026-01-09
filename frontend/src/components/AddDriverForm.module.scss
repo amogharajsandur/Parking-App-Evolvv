@@ -87,9 +87,11 @@
           }
 
           &:focus-within {
-            border-color: var(--role-primary, $text-main);
+            @include role-theme('border-color', 'primary');
             box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.05);
-            svg { color: var(--role-primary, $text-main); }
+            svg { 
+              @include role-theme('color', 'primary');
+            }
           }
         }
       }

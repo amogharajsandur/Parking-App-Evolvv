@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Truck, MapPin, User, Clock, Phone, CheckCircle, Bell, ChevronRight, Car, ArrowLeft, MoreHorizontal } from 'lucide-react';
-import { useRole } from '../context/RoleContext';
+import { useRole } from '../../context/RoleContext';
 import styles from './ValetView.module.scss';
 
 const ValetView = () => {
@@ -122,7 +122,7 @@ const ValetView = () => {
         {upcomingTasks.length > 0 && !activeTask && (
             <section className={styles.newAssignments}>
             <div className={styles.labelRow}>
-                <Bell size={16} color="var(--role-primary)" />
+                <Bell size={16} className={styles.bellIcon} />
                 <h3>Next Assignment</h3>
             </div>
             

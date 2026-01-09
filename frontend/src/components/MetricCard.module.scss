@@ -19,7 +19,7 @@
     }
 
     .icon {
-      color: var(--role-primary, $primary);
+      @include role-theme('color', 'primary');
       opacity: 0.8;
     }
   }

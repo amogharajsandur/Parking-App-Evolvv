@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search, Car, ArrowLeft, UserPlus, Phone, MapPin, Clock, Landmark, MoreVertical, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useRole } from '../context/RoleContext';
-import MetricCard from '../components/MetricCard';
-import AddDriverForm from '../components/AddDriverForm';
-import API_BASE_URL from '../config';
+import { useRole } from '../../context/RoleContext';
+import MetricCard from '../../components/MetricCard';
+import AddDriverForm from '../../components/AddDriverForm';
+import API_BASE_URL from '../../config';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {

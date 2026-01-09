@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .settingsPage {
   @include container-base;
@@ -36,12 +36,13 @@
     .avatar {
       width: 64px;
       height: 64px;
-      background: var(--role-secondary, $primary-light);
+      height: 64px;
+      @include role-theme('background', 'secondary');
       border-radius: 20px;
       @include flex;
       font-size: 24px;
       font-weight: 800;
-      color: var(--role-primary, $primary);
+      @include role-theme('color', 'primary');
       border: 1px solid rgba(0,0,0,0.03);
     }
 
@@ -64,7 +65,11 @@
       transition: $transition-base;
       box-shadow: $shadow-sm;
 
-      &:hover { transform: translateY(-2px); border-color: var(--role-primary, $primary); box-shadow: $shadow-md; }
+      &:hover { 
+        transform: translateY(-2px); 
+        @include role-theme('border-color', 'primary');
+        box-shadow: $shadow-md; 
+      }
       &:active { transform: scale(0.98); }
 
       .icon {
@@ -72,8 +77,9 @@
         height: 44px;
         background: $bg-light;
         border-radius: 12px;
+        border-radius: 12px;
         @include flex;
-        color: var(--role-primary, $primary);
+        @include role-theme('color', 'primary');
         border: 1px solid rgba(0,0,0,0.02);
       }
 

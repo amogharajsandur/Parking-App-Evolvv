@@ -19,11 +19,8 @@ body {
   overflow: hidden;
   transition: all 0.5s ease;
 
-  // Role backgrounds and theme colors
-  &.role-user { --role-primary: #{$user-role}; --role-secondary: #eff6ff; }
-  &.role-manager { --role-primary: #{$manager-role}; --role-secondary: #ecfdf5; }
-  &.role-driver { --role-primary: #{$driver-role}; --role-secondary: #fffbeb; }
-  &.role-admin { --role-primary: #{$admin-role}; --role-secondary: #f3e8ff; }
+  // Role backgrounds handled via SCSS mixins now
+  // See _mixins.scss role-theme()
 }
 
 #root { width: 100%; }
@@ -36,20 +33,59 @@ body {
   height: 100vh;
   padding: 20px;
   width: 100%;
+
+  @media (max-width: 1024px) {
+    padding: 0;
+    gap: 0; 
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow: hidden; 
+    background: #f1f5f9; // Match body bg
+  }
 }
 
 .app-container {
-  width: 390px; // Slightly smaller for better fit
-  height: 844px; // iPhone 12/13/14 height
+  width: 390px;
+  height: 844px;
   max-height: calc(100vh - 40px);
   background-color: $bg-light;
-  position: relative; // Crucial for absolute positioning of children
+  position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 48px; 
   overflow: hidden;
   box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25), 0 0 0 12px #1e293b;
   flex-shrink: 0;
+
+  // @media (max-width: 1024px) {
+  //   // RESTORE THE FRAME
+  //   border-radius: 48px; 
+  //   box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3), 0 0 0 10px #1e293b; 
+  //   border: none;
+    
+  //   // Scale to fit ~85% of screen height
+  //   transform: scale(0.85); 
+  //   transform-origin: top center;
+    
+  //   width: 390px; // Maintain ratio
+  //   height: 844px;
+  //   max-height: none; // Unset default
+    
+  //   margin-top: 5px; // Small gap from header
+  //   margin-bottom: 20px; 
+  // }
+  
+  // Smaller phones
+  @media (max-width: 480px) {
+      transform: scale(0.78);
+      box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.3), 0 0 0 8px #1e293b;
+  }
+  
+  // Very small phones
+  @media (max-width: 380px) {
+      transform: scale(0.72);
+  }
 }
 
 .bottom-fixed-layer {
@@ -66,13 +102,12 @@ body {
 .main-content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 90px; // Space for bottom nav
+  padding-bottom: 90px; 
   position: relative;
   
   &::-webkit-scrollbar { display: none; }
 }
 
-// Fixed: Remove bottom padding for non-user roles as they don't have the bottom nav
 body:not(.role-user) .main-content {
   padding-bottom: 0 !important;
 }
@@ -81,6 +116,25 @@ body:not(.role-user) .main-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 1024px) {
+    display: flex; 
+    flex-direction: row; 
+    order: -1; 
+    width: 100%;
+    
+    // FIXED HEIGHT for Role Switcher (approx 15%)
+    height: 100px; 
+    min-height: 100px;
+    flex-shrink: 0;
+    
+    align-items: flex-end; // Align bottom so it feels close to phone
+    padding-bottom: 10px;
+    justify-content: center; 
+    
+    // Transparent bg to blend 
+    background: transparent; 
+  }
 }
 
 // Typography Enhancements

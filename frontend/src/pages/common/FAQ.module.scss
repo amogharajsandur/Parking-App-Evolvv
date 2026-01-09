@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .faqPage {
   @include container-base;
@@ -41,7 +41,9 @@
     .avatar {
       width: 56px;
       height: 56px;
-      background: var(--role-primary, $primary);
+      height: 56px;
+      @include role-theme('background', 'primary');
+      color: white;
       color: white;
       border-radius: 16px;
       @include flex;
@@ -66,7 +68,10 @@
       color: #64748b;
       cursor: pointer;
       transition: $transition-base;
-      &:hover { color: var(--role-primary, $primary); border-color: var(--role-primary, $primary); }
+      &:hover { 
+        @include role-theme('color', 'primary');
+        @include role-theme('border-color', 'primary');
+      }
     }
   }
 
@@ -108,10 +113,16 @@
       }
 
       &.active {
-        border-color: var(--role-primary, $primary);
+        @include role-theme('border-color', 'primary');
         box-shadow: $shadow-premium;
-        .qIcon { background: var(--role-secondary, $primary-light); color: var(--role-primary, $primary); }
-        .chevron { transform: rotate(180deg); color: var(--role-primary, $primary); }
+        .qIcon { 
+          @include role-theme('background', 'secondary');
+          @include role-theme('color', 'primary');
+        }
+        .chevron { 
+          transform: rotate(180deg);
+          @include role-theme('color', 'primary');
+        }
       }
     }
   }
