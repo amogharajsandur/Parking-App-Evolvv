@@ -1,27 +1,31 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Home, Ticket, History, Settings, LayoutDashboard, Truck } from 'lucide-react';
-import './BottomNav.scss';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Home, Ticket, Clock, Settings } from 'lucide-react';
+import styles from './BottomNav.module.scss';
 
 const BottomNav = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const navItems = [
+    { id: 'home', icon: Home, label: 'Home', path: '/' },
+    { id: 'ticket', icon: Ticket, label: 'Ticket', path: '/ticket' },
+    { id: 'history', icon: Clock, label: 'History', path: '/history' },
+    { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
+  ];
+
   return (
-    <nav className="bottom-nav">
-      <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Home size={20} />
-        <span>Home</span>
-      </NavLink>
-      <NavLink to="/dashboard" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <LayoutDashboard size={20} />
-        <span>Manager</span>
-      </NavLink>
-      <NavLink to="/valet" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <Truck size={20} />
-        <span>Valet</span>
-      </NavLink>
-      <NavLink to="/history" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <History size={20} />
-        <span>History</span>
-      </NavLink>
+    <nav className={styles.bottomNav}>
+      {navItems.map((item) => (
+        <button
+          key={item.id}
+          className={`${styles.navItem} ${location.pathname === item.path ? styles.active : ''}`}
+          onClick={() => navigate(item.path)}
+        >
+          <item.icon size={24} />
+          <span>{item.label}</span>
+        </button>
+      ))}
     </nav>
   );
 };

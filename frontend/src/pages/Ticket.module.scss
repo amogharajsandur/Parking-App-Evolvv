@@ -1,0 +1,246 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.ticketPage {
+  @include container-base;
+
+  .pageHeader {
+    @include glass-header;
+    @include flex(flex-start, center, row, 16px);
+    
+    .backBtn { 
+      @include back-button;
+    }
+    h2 { font-size: 20px; font-weight: 700; }
+  }
+
+  .contentScroll {
+    @include content-scroll;
+  }
+
+  .statusBadge {
+    background: $success;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 20px;
+    @include flex(center, center, row, 12px);
+    font-weight: 800;
+    margin-bottom: $spacing-xl;
+    margin-top: -$spacing-lg;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+  }
+
+  .ticketCard {
+    background: white;
+    border-radius: 32px;
+    margin: 0 4px $spacing-xl;
+    position: relative;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f1f5f9;
+
+    .ticketInner {
+      padding: $spacing-xl;
+    }
+
+    .ticketTop {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+      .systemName { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 6px; font-weight: 800; letter-spacing: 1px; }
+      h3 { font-size: 22px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+      .locBadge { color: var(--role-primary, $primary); font-weight: 700; font-size: 15px; }
+    }
+
+    .qrWrapper {
+      background: #f8fafc;
+      padding: 30px;
+      border-radius: 24px;
+      @include flex;
+      margin-bottom: $spacing-xl;
+      border: 1px solid #f1f5f9;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .ticketDetails {
+      .detailItem {
+        @include flex(flex-start, stretch, row, 16px);
+        margin-bottom: $spacing-lg;
+        
+        .itemIcon {
+          width: 40px;
+          height: 40px;
+          background: #f8fafc;
+          border-radius: 12px;
+          @include flex;
+          color: $text-muted;
+        }
+
+        .txt {
+           label { font-size: 11px; text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 4px; font-weight: 700; }
+           p { font-size: 14px; font-weight: 700; color: #334155; span { font-weight: 500; color: #94a3b8; } }
+           .amt { font-size: 20px; font-weight: 800; color: #1e293b; }
+        }
+
+        &.amountItem {
+          border-top: 2px dashed #f1f5f9;
+          margin-top: $spacing-xl;
+          padding-top: $spacing-xl;
+        }
+      }
+    }
+
+    .ticketFooter {
+      text-align: center;
+      padding: $spacing-lg 0;
+      p { font-size: 11px; color: #cbd5e1; font-weight: 500; }
+    }
+
+    .cutout {
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      background: $bg-light;
+      border-radius: 50%;
+      z-index: 2;
+      border: 1px solid #f1f5f9;
+      &.left { left: -13px; border-left-color: transparent; }
+      &.right { right: -13px; border-right-color: transparent; }
+    }
+  }
+
+  .footerAction {
+    padding: $spacing-md;
+    background: white;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+
+    .retrieveBtn, .confirmBtn {
+      @include premium-button(var(--role-primary, $primary));
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  // --- Retrieval Styles ---
+  .retrievalCard {
+    background: var(--role-primary, $warning);
+    border-radius: 24px;
+    padding: $spacing-xl;
+    color: white;
+    margin-bottom: $spacing-xl;
+    margin-top: -$spacing-lg;
+    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+
+    .statusHero {
+      @include flex(flex-start, stretch, row, 16px);
+      margin-bottom: $spacing-xl;
+      h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+      p { font-size: 13px; opacity: 0.9; font-weight: 500; }
+    }
+
+    .etaBadge {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 14px;
+      border-radius: 16px;
+      @include flex(center, center, row, 10px);
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .progressSection {
+    background: white;
+    border-radius: 24px;
+    padding: $spacing-xl;
+    margin-bottom: $spacing-xl;
+    border: 1px solid #f1f5f9;
+    box-shadow: $shadow-sm;
+
+    h3 { font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: $spacing-xl; }
+
+    .timeline {
+      padding-left: 10px;
+      .timelineItem {
+        @include flex(flex-start, stretch, row, 20px);
+        position: relative;
+        padding-bottom: 40px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 12px;
+          top: 24px;
+          bottom: 0px;
+          width: 2px;
+          background: #f1f5f9;
+        }
+
+        &:last-child { padding-bottom: 0; &::after { display: none; } }
+
+        .trackIcon {
+          width: 26px;
+          height: 26px;
+          z-index: 1;
+        }
+
+        .trackInfo {
+          h4 { font-size: 15px; font-weight: 700; color: #334155; margin-bottom: 4px; }
+          p { font-size: 12px; color: $text-muted; font-weight: 500; }
+        }
+
+        &.done {
+          .trackIcon { color: $success; }
+          &::after { background: $success; }
+        }
+        &.active {
+          .trackIcon { color: var(--role-primary, $warning); }
+          h4 { color: #1e293b; }
+        }
+        &.pending {
+          .trackIcon { color: #e2e8f0; }
+          h4 { color: #cbd5e1; }
+        }
+      }
+    }
+  }
+
+  .detailsCard {
+    background: white;
+    border-radius: 24px;
+    padding: $spacing-xl;
+    margin-bottom: $spacing-xl;
+    border: 1px solid #f1f5f9;
+
+    h3 { font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: $spacing-lg; }
+    .vehicleBrief {
+      @include flex(flex-start, center, row, 16px);
+      .vIconBg {
+        width: 48px;
+        height: 48px;
+        background: #f8fafc;
+        border-radius: 14px;
+        @include flex;
+        color: $text-muted;
+      }
+      .vName { font-size: 15px; font-weight: 700; color: #334155; margin-bottom: 2px; }
+      .vPlate { font-size: 12px; color: $text-muted; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}

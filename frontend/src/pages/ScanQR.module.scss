@@ -1,0 +1,157 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.scanQrPage {
+  @include container-base;
+  background: #0f172a; // Deep dark background for scanner
+  color: white;
+
+  .scanHeader {
+    padding: $spacing-xl $spacing-md;
+    @include flex(flex-start, center, row, 16px);
+    
+    .closeBtn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-md;
+      @include flex;
+      transition: $transition-base;
+      &:hover { background: rgba(255, 255, 255, 0.2); }
+    }
+    h2 { font-size: 18px; font-weight: 700; }
+  }
+
+  .scannerContainer {
+    flex: 1;
+    @include flex(center, center, column);
+    padding-bottom: 120px;
+    cursor: pointer;
+
+    .scanFrame {
+      width: 280px;
+      height: 280px;
+      position: relative;
+      @include flex;
+      margin-bottom: 40px;
+
+      .qrIcon {
+        opacity: 0.15;
+        color: white;
+      }
+
+      .corner {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--role-primary, $primary);
+        
+        &.topLeft { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 20px 0 0 0; }
+        &.topRight { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 20px 0 0; }
+        &.bottomLeft { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 20px; }
+        &.bottomRight { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 20px 0; }
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--role-primary, $primary);
+        box-shadow: 0 0 15px var(--role-primary, $primary);
+        animation: scanAnim 3s ease-in-out infinite;
+      }
+    }
+
+    .scanText {
+      text-align: center;
+      h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: white; }
+      p { color: rgba(255, 255, 255, 0.5); font-weight: 500; }
+    }
+  }
+
+  .vehicleSheet {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 32px 32px 0 0;
+    padding: $spacing-xl $spacing-lg;
+    color: $text-main;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+
+    &.open {
+      transform: translateY(-100%);
+      bottom: 0;
+    }
+
+    .handle {
+      width: 44px;
+      height: 4px;
+      background: #E2E8F0;
+      border-radius: 2px;
+      margin: -8px auto $spacing-xl;
+    }
+
+    h3 { font-size: 20px; font-weight: 800; color: $text-main; margin-bottom: 4px; }
+    .subtitle { font-size: 14px; color: $text-muted; margin-bottom: $spacing-xl; font-weight: 500; }
+
+    .vehicleList {
+      @include flex(flex-start, stretch, column, $spacing-md);
+      margin-bottom: $spacing-xl;
+      max-height: 350px;
+      overflow-y: auto;
+      &::-webkit-scrollbar { display: none; }
+
+      .vehicleItem {
+        @include flex(flex-start, center, row, 16px);
+        padding: $spacing-lg;
+        background: $bg-light;
+        border: 1px solid #f1f5f9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: $transition-base;
+
+        &:hover { background: white; border-color: var(--role-primary, $primary); transform: translateY(-2px); box-shadow: $shadow-sm; }
+
+        .vIcon {
+          width: 48px;
+          height: 48px;
+          background: white;
+          border-radius: 14px;
+          @include flex;
+          color: $text-muted;
+          border: 1px solid #f1f5f9;
+        }
+
+        .vInfo {
+          flex: 1;
+          h4 { font-size: 16px; font-weight: 700; color: $text-main; margin-bottom: 2px; }
+          span { font-size: 12px; color: $text-muted; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        }
+
+        .arrow { color: #CBD5E1; }
+      }
+    }
+
+    .registerBtn {
+      @include premium-button(var(--role-primary, $primary));
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+@keyframes scanAnim {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
+}

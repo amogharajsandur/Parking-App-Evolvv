@@ -1,0 +1,152 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.confirmParkingPage {
+  @include container-base;
+
+  .pageHeader {
+    @include glass-header;
+    @include flex(flex-start, center, row, 16px);
+    
+    .backBtn { 
+      @include back-button;
+    }
+    h2 { font-size: 20px; font-weight: 700; }
+  }
+
+  .contentScroll {
+    @include content-scroll;
+  }
+
+  .autoFillBadge {
+    background: $success-light;
+    color: $success;
+    padding: 12px 20px;
+    border-radius: $radius-lg;
+    @include flex(flex-start, center, row, 12px);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: $spacing-xl;
+    margin-top: -$spacing-lg;
+    box-shadow: $shadow-sm;
+    border: 1px solid rgba(0,0,0,0.02);
+  }
+
+  .summaryScroll {
+    .card {
+      @include premium-card;
+      margin-bottom: $spacing-lg;
+    }
+
+    .sectionHeader {
+      @include flex(flex-start, center, row, 10px);
+      color: $text-muted;
+      margin-bottom: $spacing-lg;
+      h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+    }
+
+    .detailsGrid {
+      .row {
+        @include flex(space-between, center);
+        margin-bottom: $spacing-md;
+        .label { color: $text-muted; font-size: 14px; font-weight: 500; }
+        .val { font-weight: 700; font-size: 14px; color: $text-main; }
+        &:last-child { margin-bottom: 0; }
+      }
+    }
+
+    .locInfo {
+      h4 { font-size: 16px; font-weight: 700; color: $text-main; margin-bottom: 4px; }
+      p { font-size: 13px; color: $text-muted; font-weight: 500; }
+    }
+
+    .paymentSection {
+      margin-bottom: $spacing-xl;
+      .sectionTitle {
+        margin-bottom: $spacing-lg;
+        padding-left: 4px;
+        h3 { font-size: 16px; font-weight: 800; color: $text-main; margin-bottom: 2px; }
+        p { font-size: 13px; color: $text-muted; font-weight: 500; }
+      }
+
+      .paymentGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $spacing-md;
+
+        .pmCard {
+          background: white;
+          border: 1px solid #f1f5f9;
+          border-radius: $radius-xl;
+          padding: $spacing-lg;
+          @include flex(flex-start, center, column, 12px);
+          position: relative;
+          cursor: pointer;
+          transition: $transition-premium;
+          box-shadow: $shadow-sm;
+
+          .pmIcon {
+            width: 52px;
+            height: 52px;
+            border-radius: $radius-lg;
+            @include flex;
+          }
+
+          span { font-size: 14px; font-weight: 700; color: $text-main; }
+
+          &.active {
+            border-color: var(--role-primary, $primary);
+            background: white;
+            box-shadow: $shadow-md;
+            transform: translateY(-4px);
+            
+            .selectedDot {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              width: 18px;
+              height: 18px;
+              border: 2px solid var(--role-primary, $primary);
+              border-radius: 50%;
+              @include flex;
+              .inner {
+                width: 8px;
+                height: 8px;
+                background: var(--role-primary, $primary);
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .amountSection {
+      .row {
+        @include flex(space-between, center);
+        margin-bottom: $spacing-md;
+        span { font-size: 14px; color: $text-muted; font-weight: 500; }
+        
+        &.total {
+          border-top: 2px dashed #f1f5f9;
+          margin-top: $spacing-lg;
+          padding-top: $spacing-lg;
+          span { font-weight: 800; color: $text-main; font-size: 16px; }
+          .amt { font-size: 20px; color: var(--role-primary, $primary); }
+        }
+      }
+    }
+  }
+
+  .footerAction {
+    padding: $spacing-md;
+    background: white;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+
+    .parkBtn {
+      @include premium-button(var(--role-primary, $primary));
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

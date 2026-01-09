@@ -1,0 +1,37 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.carCard {
+  @include premium-card;
+  @include flex(space-between, center);
+  padding: $spacing-md;
+
+  .left {
+    @include flex(flex-start, center, row, 12px);
+    
+    .iconBox {
+      width: 44px;
+      height: 44px;
+      background: var(--role-secondary, $primary-light);
+      border-radius: 12px;
+      @include flex;
+      color: var(--role-primary, $primary);
+    }
+
+    .info {
+      h4 { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+      p { font-size: 11px; color: $text-muted; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+    }
+  }
+
+  .status {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    
+    &.active { background: $success-light; color: $success; }
+    &.inactive { background: $bg-light; color: $text-muted; }
+  }
+}

@@ -1,0 +1,159 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.homePage {
+  @include container-base;
+
+  .homeHeader {
+    @include glass-header;
+    padding-bottom: 30px;
+    border-radius: 0 0 32px 32px;
+    margin-bottom: $spacing-lg;
+    transition: background 0.5s ease;
+
+    .topBar {
+      margin-bottom: $spacing-lg;
+      .welcome {
+        h2 { color: white; font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+        p { color: rgba(255, 255, 255, 0.8); font-size: 14px; font-weight: 500; }
+      }
+    }
+
+    .heroBanner {
+      @include flex(space-between, center);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: $spacing-lg;
+      border-radius: $radius-xl;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: $shadow-lg;
+
+      .bannerContent {
+        .badgePremium {
+          display: inline-block;
+          font-size: 10px;
+          font-weight: 800;
+          background: #fbbf24;
+          color: #92400e;
+          padding: 4px 10px;
+          border-radius: 6px;
+          margin-bottom: $spacing-sm;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; color: white; }
+        p { font-size: 14px; color: rgba(255, 255, 255, 0.9); font-weight: 500; }
+      }
+      
+      .bannerAction {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .contentScroll {
+    @include content-scroll;
+    padding-top: 0;
+  }
+
+  .mainActions {
+    margin-bottom: $spacing-xl;
+
+    .scanParkCard {
+      @include flex(flex-start, center, row, $spacing-lg);
+      background: var(--role-secondary, #eff6ff);
+      border: 1px solid var(--role-primary, #3b82f6);
+      border-radius: $radius-xl;
+      padding: $spacing-lg;
+      cursor: pointer;
+      transition: $transition-premium;
+      box-shadow: $shadow-premium;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $shadow-premium-hover;
+      }
+
+      .qrIconBg {
+        width: 64px;
+        height: 64px;
+        background: var(--role-primary, #3b82f6);
+        border-radius: $radius-lg;
+        @include flex;
+        color: white;
+        box-shadow: 0 8px 15px -1px rgba(0,0,0,0.1);
+      }
+
+      .textInfo {
+        flex: 1;
+        h3 { @include heading-2; margin-bottom: 4px; }
+        p { font-size: 13px; color: $text-muted; font-weight: 500; }
+      }
+      
+      .chevron {
+        color: #cbd5e1;
+      }
+    }
+  }
+
+  .recentSection {
+    .sectionTitle {
+      margin-bottom: $spacing-md;
+      h3 { @include heading-1; font-size: 18px; }
+    }
+
+    .historyCards {
+      @include flex(flex-start, stretch, column, 10px);
+
+      .parkingItem {
+        @include premium-card;
+        padding: 16px;
+        @include flex(flex-start, center, row, 16px);
+        margin-bottom: 4px;
+
+        .iconBox {
+          width: 44px;
+          height: 44px;
+          background: $bg-light;
+          border-radius: 12px;
+          @include flex;
+          color: var(--role-primary, $primary);
+          flex-shrink: 0;
+        }
+
+        .centerInfo {
+          flex: 1;
+          .top {
+            @include flex(space-between, center);
+            margin-bottom: 4px;
+            h4 { font-size: 15px; font-weight: 700; color: #1e293b; }
+            .cost { font-size: 14px; font-weight: 800; color: #1e293b; }
+          }
+          .sub {
+            @include flex(flex-start, center, row, 4px);
+            color: $text-muted;
+            font-size: 12px;
+          }
+        }
+
+        .rightInfo {
+          @include flex(flex-end, flex-end, column, 6px);
+          .statusBadge {
+            background: $success-light;
+            color: $success;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+          }
+          .date {
+            font-size: 11px;
+            color: $text-muted;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

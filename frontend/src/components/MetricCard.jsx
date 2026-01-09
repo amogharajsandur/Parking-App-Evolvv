@@ -1,17 +1,19 @@
 import React from 'react';
-import './MetricCard.scss';
+import styles from './MetricCard.module.scss';
 
-const MetricCard = ({ label, value, subtext, icon: Icon, color }) => {
+const MetricCard = ({ title, value, icon: Icon, trend }) => {
   return (
-    <div className={`metric-card card ${color}`}>
-      <div className="metric-content">
-        <span className="label">{label}</span>
-        <h2 className="value">{value}</h2>
-        {subtext && <span className="subtext">{subtext}</span>}
+    <div className={styles.metricCard}>
+      <div className={styles.header}>
+        <span className={styles.title}>{title}</span>
+        {Icon && <Icon size={18} className={styles.icon} />}
       </div>
-      <div className="metric-icon">
-        <Icon size={24} />
-      </div>
+      <div className={styles.value}>{value}</div>
+      {trend && (
+        <div className={`${styles.trend} ${trend.startsWith('+') ? styles.positive : styles.negative}`}>
+          {trend} from yesterday
+        </div>
+      )}
     </div>
   );
 };

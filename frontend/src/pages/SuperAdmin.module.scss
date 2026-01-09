@@ -1,0 +1,381 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.adminPage {
+  @include container-base;
+  background: #f8fafc; // Lighter background for admin dashboard clean look
+
+  .adminHeader {
+    @include glass-header;
+    // Use the SASS variable directly for darken function
+    background: linear-gradient(135deg, $admin-role 0%, darken($admin-role, 10%) 100%);
+    
+    .adminHeaderContent {
+        width: 100%;
+        @include flex(flex-start, center, row);
+        margin-bottom: $spacing-md;
+
+        .headerTop {
+          @include flex(flex-start, center, row, 12px);
+          
+          .backBtn {
+            @include back-button;
+            background: rgba(255, 255, 255, 0.2);
+            &:hover { background: rgba(255, 255, 255, 0.3); }
+          }
+    
+          .titleTxt {
+            h1 { font-size: 20px; font-weight: 700; color: white; margin-bottom: 2px; }
+            p { font-size: 11px; color: rgba(255, 255, 255, 0.9); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+          }
+        }
+    }
+  }
+
+  .contentScroll {
+    @include content-scroll;
+  }
+
+  .tabSwitcher {
+    background: white;
+    padding: 6px;
+    border-radius: 16px;
+    @include flex;
+    margin-bottom: $spacing-xl;
+    box-shadow: $shadow-sm;
+    border: 1px solid #e2e8f0;
+
+    button {
+      flex: 1;
+      border: none;
+      background: none;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-muted;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: $transition-base;
+
+      &.active {
+        background: $admin-role;
+        color: white;
+        box-shadow: $shadow-sm;
+      }
+    }
+  }
+
+  .siteSelector {
+    margin-bottom: $spacing-xl;
+    p { font-size: 12px; font-weight: 700; color: $text-muted; margin-bottom: 8px; text-transform: uppercase; }
+    
+    .selectBox {
+      background: white;
+      padding: 16px;
+      border-radius: 16px;
+      @include flex(flex-start, center, row, 12px);
+      border: 1px solid #e2e8f0;
+      box-shadow: $shadow-sm;
+      cursor: pointer;
+      
+      span { flex: 1; font-weight: 600; color: #1e293b; font-size: 14px; }
+    }
+  }
+
+  .statsSection {
+    margin-bottom: $spacing-xl;
+    .sectionTitle {
+      @include flex(flex-start, center, row, 8px);
+      margin-bottom: $spacing-md;
+      color: #334155;
+      h3 { font-size: 15px; font-weight: 700; }
+    }
+
+    .statsGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-md;
+
+      .statCard {
+        @include premium-card;
+        padding: 20px;
+        @include flex(space-between, flex-start, column, 12px);
+        min-height: 110px; // Ensure uniform height
+
+        .cardHeader {
+            width: 100%;
+            @include flex(space-between, center);
+            
+            label { font-size: 11px; color: $text-muted; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+            .iconOpac { opacity: 0.3; color: $admin-role; }
+        }
+
+        h2 { font-size: 28px; font-weight: 800; color: #1e293b; line-height: 1; }
+        .price { color: #16a34a; } 
+      }
+    }
+  }
+
+  .overallStats {
+    margin-bottom: 100px;
+    .sectionTitle {
+      @include flex(flex-start, center, row, 8px);
+      margin-bottom: $spacing-md;
+      color: #334155;
+      h3 { font-size: 15px; font-weight: 700; }
+    }
+
+    .statsList {
+      @include flex(flex-start, stretch, column, $spacing-md);
+      
+      .statRow {
+        @include premium-card;
+        padding: $spacing-md $spacing-lg;
+        @include flex(flex-start, center, row, 16px);
+        
+        .iconBox {
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
+          @include flex;
+          
+          &.purple { background: #f3e8ff; color: #9333ea; }
+          &.green { background: #dcfce7; color: #16a34a; }
+          &.blue { background: #dbeafe; color: #2563eb; }
+        }
+
+        .label { flex: 1; font-size: 14px; font-weight: 600; color: #475569; }
+        .val { font-size: 18px; font-weight: 700; color: #1e293b; }
+      }
+    }
+  }
+
+  .sitesSection, .approvalsSection {
+     @include flex(flex-start, stretch, column, $spacing-md);
+     
+ // Approvals
+    .approvalsSection {
+        padding: 0 4px;
+
+        .approvalCard {
+            background: white;
+            border: 1px solid #7c3aed; // Purple border
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: $shadow-sm;
+
+            .cardTop {
+                @include flex(flex-start, center, row, 16px);
+                margin-bottom: 20px;
+                
+                .avatar {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    background: #f1f5f9;
+                    img { width: 100%; height: 100%; object-fit: cover; }
+                }
+
+                .info {
+                    h4 { font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+                    .metaRow {
+                        @include flex(flex-start, center, row, 6px);
+                        font-size: 13px;
+                        color: #64748b;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+
+            .submitInfo {
+                background: #fcfaff; // Very light purple bg
+                border: 1px solid #f3e8ff;
+                border-radius: 12px;
+                padding: 12px 16px;
+                margin-bottom: 20px;
+                
+                .row {
+                    @include flex(space-between, center);
+                    margin-bottom: 4px;
+                    font-size: 13px;
+                    color: #64748b;
+                    
+                    b { color: #1e293b; font-weight: 600; }
+                    &:last-child { margin-bottom: 0; }
+                }
+            }
+
+            .actionButtons {
+                @include flex(flex-start, center, row, 12px);
+                
+                .viewBtn {
+                    flex: 1;
+                    padding: 12px;
+                    background: #f1f5f9;
+                    color: #475569;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    @include flex(center, center, row, 8px);
+                    &:hover { background: #e2e8f0; }
+                }
+                
+                .approveBtn {
+                    flex: 1;
+                    padding: 12px;
+                    background: #10b981; // Green
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    @include flex(center, center, row, 8px);
+                     &:hover { background: #059669; }
+
+                     .iconCircle {
+                         width: 16px; height: 16px; border: 1.5px solid white; border-radius: 50%; @include flex;
+                     }
+                }
+                
+                .rejectBtn {
+                    flex: 1;
+                    padding: 12px;
+                    background: #ef4444; // Red
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    @include flex(center, center, row, 8px);
+                    &:hover { background: #dc2626; }
+                }
+            }
+        }
+    }
+
+    // Modal
+    .modalOverlay {
+        position: fixed;
+        top: 0; bottom: 0; left: 0; right: 0;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+        @include flex(center, flex-end); // Bottom sheet on mobile
+    }
+    
+    .profileModal {
+        width: 100%;
+        height: 90vh;
+        background: white;
+        border-radius: 24px 24px 0 0;
+        overflow-y: auto;
+        animation: slideUp 0.3s ease-out;
+        
+        @include desktop {
+            width: 400px;
+            height: auto;
+            max-height: 85vh;
+            border-radius: 24px;
+            align-self: center; // Center on desktop
+        }
+
+        .modalWithHeader {
+            background: #7c3aed; // Purple Header
+            padding: 24px;
+            color: white;
+            @include flex(flex-start, center, row, 12px);
+            
+            h3 { font-size: 18px; font-weight: 700; }
+            .backIcon { background: none; border: none; cursor: pointer; color: white; padding: 0; }
+        }
+        
+        .modalBody {
+            padding: 24px;
+            @include flex(flex-start, stretch, column);
+            
+            .avatarSection {
+                align-self: center;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 4px solid white;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                margin-top: -50px; // Overlap header
+                margin-bottom: 24px;
+                background: white;
+                overflow: hidden;
+                img { width: 100%; height: 100%; object-fit: cover; }
+            }
+            
+            .detailSection {
+                background: #f8fafc;
+                border-radius: 16px;
+                padding: 20px;
+                margin-bottom: 20px;
+                
+                h4 { font-size: 14px; color: #334155; margin-bottom: 12px; font-weight: 600; }
+                
+                .row {
+                   @include flex(space-between, center);
+                   margin-bottom: 8px;
+                   font-size: 13px;
+                   
+                   label { color: #94a3b8; }
+                   span { color: #1e293b; font-weight: 600; text-align: right; }
+                }
+                
+                .licenseImg {
+                    width: 100%;
+                    height: 140px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    margin-top: 12px;
+                    img { width: 100%; height: 100%; object-fit: cover; }
+                }
+            }
+        }
+    }
+    
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); }}
+     .siteCard, .approvalItem {
+        @include premium-card;
+        @include flex(flex-start, center, row, 16px);
+        
+        .iconBox {
+            width: 44px;
+            height: 44px;
+            background: $bg-light;
+            border-radius: 12px;
+            @include flex;
+            color: $admin-role;
+        }
+        
+        .text {
+            flex: 1;
+            h4 { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+            p { font-size: 12px; color: $text-muted; font-weight: 500; }
+        }
+        
+        .manageBtn, .approveBtn {
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .manageBtn { background: #f1f5f9; color: #475569; }
+        .approveBtn { background: $success-light; color: $success; }
+     }
+
+     .addBtn {
+        @include premium-button($admin-role);
+        justify-content: center;
+        margin-top: $spacing-md;
+     }
+  }
+}

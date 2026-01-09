@@ -1,0 +1,41 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.metricCard {
+  @include premium-card;
+  background: white;
+  padding: $spacing-lg;
+  
+  .header {
+    @include flex(space-between, center);
+    margin-bottom: $spacing-sm;
+    
+    .title {
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .icon {
+      color: var(--role-primary, $primary);
+      opacity: 0.8;
+    }
+  }
+
+  .value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 4px;
+  }
+
+  .trend {
+    font-size: 12px;
+    font-weight: 600;
+    
+    &.positive { color: $success; }
+    &.negative { color: $danger; }
+  }
+}

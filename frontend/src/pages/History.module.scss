@@ -1,0 +1,174 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.historyPage {
+  @include container-base;
+
+  .historyHeader {
+    @include glass-header;
+    @include flex(flex-start, center, row, 16px);
+    
+    .headerTop {
+      @include flex(flex-start, center, row, 16px);
+      margin-bottom: $spacing-md;
+
+      .backBtn {
+        @include back-button;
+      }
+
+      h1 { font-size: 20px; font-weight: 700; color: white; }
+    }
+
+    .summaryText {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .historyList {
+    @include content-scroll;
+  }
+
+  .historyCardWrapper {
+    background: white;
+    border: 1px solid #f1f5f9;
+    box-shadow: $shadow-sm;
+    margin-bottom: $spacing-md;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: $transition-premium;
+
+    .cardMain {
+      padding: $spacing-lg;
+      cursor: pointer;
+
+      .cardHeader {
+        @include flex(space-between, flex-start);
+        margin-bottom: $spacing-lg;
+
+        .locInfo {
+          h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+          .locSub {
+            @include flex(flex-start, center, row, 4px);
+            color: $text-muted;
+            font-size: 12px;
+            font-weight: 500;
+          }
+        }
+
+        .amountStatus {
+          text-align: right;
+          .price { font-size: 16px; font-weight: 800; color: #1e293b; display: block; margin-bottom: 4px; }
+          .statusBadge {
+            font-size: 10px;
+            font-weight: 800;
+            color: $success;
+            background: $success-light;
+            padding: 4px 10px;
+            border-radius: $radius-sm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+
+      .cardMeta {
+        @include flex(flex-start, center, row, $spacing-md);
+        border-top: 1px solid $bg-light;
+        padding-top: $spacing-lg;
+
+        .metaItem {
+          @include flex(flex-start, center, row, 6px);
+          color: $text-muted;
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .arrow {
+          margin-left: auto;
+          color: #cbd5e1;
+          transition: transform $transition-base;
+        }
+      }
+    }
+
+    .cardDetails {
+      padding: 0 $spacing-lg $spacing-lg;
+      background: white;
+
+      .detailsDivider {
+        height: 1px;
+        background: #f1f5f9;
+        margin: 0 0 $spacing-lg;
+      }
+
+      h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: $text-muted;
+        margin-bottom: $spacing-lg;
+        font-weight: 800;
+      }
+
+      .detailsList {
+        @include flex(flex-start, stretch, column, $spacing-lg);
+        margin-bottom: $spacing-xl;
+        padding: $spacing-lg;
+        background: $bg-light;
+        border-radius: 16px;
+
+        .detailRow {
+          @include flex(space-between, flex-start);
+
+          .labelIcon {
+            @include flex(flex-start, center, row, 10px);
+            color: $text-muted;
+            span { font-size: 12px; font-weight: 600; }
+          }
+
+          .val { font-size: 13px; font-weight: 700; color: #334155; }
+          
+          .valMulti {
+            text-align: right;
+            p { font-size: 13px; font-weight: 700; color: #334155; }
+            span { font-size: 11px; color: $text-muted; font-weight: 500; }
+          }
+
+          &.split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: $spacing-lg;
+            .splitItem {
+              label { font-size: 10px; text-transform: uppercase; color: $text-muted; display: block; margin-bottom: 4px; font-weight: 700; }
+              p { font-size: 13px; font-weight: 700; color: #334155; }
+              &.textRight { text-align: right; }
+            }
+          }
+        }
+
+        .durationHighlight {
+          background: white;
+          padding: 12px 16px;
+          border-radius: 12px;
+          @include flex(space-between, center);
+          border: 1px solid #e2e8f0;
+          span { font-size: 13px; color: #64748b; font-weight: 600; }
+          .time { font-weight: 800; color: var(--role-primary, $primary); }
+        }
+      }
+
+      .downloadBtn {
+        @include premium-button(var(--role-primary, $primary));
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    &.expanded {
+      border-color: var(--role-primary, $primary);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      .arrow { transform: rotate(180deg); color: var(--role-primary, $primary); }
+    }
+  }
+}

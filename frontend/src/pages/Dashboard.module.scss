@@ -1,0 +1,221 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.dashboardContainer {
+  @include container-base;
+
+  .dashboardHeader {
+    @include glass-header;
+    
+    .dashboardHeaderContent {
+        @include flex(space-between, center, row); // Distribute space
+        width: 100%;
+        margin-bottom: $spacing-md;
+
+        .topTitle {
+            @include flex(flex-start, center, row, 12px);
+            
+            .backBtn {
+                @include back-button;
+                flex-shrink: 0;
+            }
+            
+            .titleTxt {
+                h1 { font-size: 20px; font-weight: 700; color: white; margin-bottom: 2px; }
+                p { font-size: 11px; color: rgba(255, 255, 255, 0.8); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+            }
+        }
+
+        .addDriverBtn {
+            // No absolute positioning
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            @include flex(center, center, row, 6px);
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: $transition-base;
+            margin-top: 4px; // Align with title
+
+            &:hover { background: rgba(255, 255, 255, 0.3); }
+        }
+    }
+  }
+
+  .contentScroll {
+    @include content-scroll;
+  }
+
+  .metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    margin-top: -$spacing-lg; 
+  }
+
+  .mainActionsSection {
+    margin-bottom: $spacing-xl;
+    
+    .searchFilterRow {
+      @include flex(space-between, center, row, $spacing-md);
+      margin-bottom: $spacing-md;
+      
+      .searchBox {
+        flex: 1;
+        background: white;
+        padding: 12px 16px;
+        border-radius: 14px;
+        @include flex(flex-start, center, row, 10px);
+        box-shadow: $shadow-sm;
+        border: 1px solid #e2e8f0;
+        
+        svg { color: $text-muted; }
+        input { 
+          border: none; 
+          outline: none; 
+          font-size: 14px; 
+          width: 100%; 
+          color: $text-main;
+          &::placeholder { color: #cbd5e1; }
+        }
+      }
+
+      .filterBtn {
+        width: 46px;
+        height: 46px;
+        background: white;
+        border-radius: 14px;
+        @include flex;
+        color: $text-muted;
+        border: 1px solid #e2e8f0;
+        box-shadow: $shadow-sm;
+        cursor: pointer;
+      }
+    }
+
+    .statusFilters {
+      @include flex(flex-start, center, row, 8px);
+      overflow-x: auto;
+      padding-bottom: 4px;
+      &::-webkit-scrollbar { display: none; }
+
+      .filterChip {
+        padding: 8px 16px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: $text-muted;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: $transition-base;
+
+        &.active {
+          background: var(--role-primary, $success);
+          color: white;
+          border-color: var(--role-primary, $success);
+          box-shadow: 0 4px 10px -2px rgba(16, 185, 129, 0.3);
+        }
+      }
+    }
+  }
+
+  .sessionsList {
+    h2 { 
+      font-size: 15px; 
+      font-weight: 700; 
+      margin-bottom: $spacing-md; 
+      color: #334155; 
+      @include flex(flex-start, center, row, 8px);
+      padding-left: 4px;
+    }
+
+    .listContainer {
+      @include flex(flex-start, stretch, column, 10px);
+    }
+
+    // New Cleaner Card Style
+    .cleanSessionCard {
+      @include premium-card;
+      padding: 16px;
+      @include flex(flex-start, center, row, 16px);
+      margin-bottom: 4px; // small gap
+
+      .leftIcon {
+        width: 44px;
+        height: 44px;
+        background: $bg-light;
+        border-radius: 12px;
+        @include flex;
+        color: var(--role-primary, $success);
+        flex-shrink: 0;
+      }
+
+      .midContent {
+        flex: 1;
+        overflow: hidden;
+
+        .topRow {
+          @include flex(flex-start, center, row, 10px);
+          margin-bottom: 4px;
+
+          h3 { font-size: 15px; font-weight: 700; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+          
+          .statusBadge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            
+            &.parked { background: #dcfce7; color: #15803d; }
+            &.retrieving { background: #fef9c3; color: #a16207; }
+            &.returned { background: #f1f5f9; color: #64748b; }
+            &.pending { background: #e0f2fe; color: #0369a1; }
+          }
+        }
+
+        .plate {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px;
+          color: $text-muted;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        .metaRow {
+          @include flex(flex-start, center, row, 6px);
+          font-size: 11px;
+          color: #94a3b8;
+          
+          .dot { font-weight: 800; opacity: 0.5; }
+        }
+      }
+
+      .rightAction {
+        @include flex(flex-end, flex-end, column, 8px);
+        
+        .time {
+          font-size: 12px;
+          font-weight: 600;
+          color: #64748b;
+        }
+
+        .moreBtn {
+          background: none;
+          border: none;
+          color: #94a3b8;
+          cursor: pointer;
+          padding: 4px;
+          &:hover { color: #334155; }
+        }
+      }
+    }
+  }
+}

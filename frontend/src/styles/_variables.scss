@@ -1,0 +1,73 @@
+// --- Colors ---
+
+// Role Primary Colors
+$primary-blue: #3b82f6; // User
+$primary-green: #10b981; // Manager
+$primary-amber: #f59e0b; // Driver
+$primary-red: #ef4444; // Admin (Error/Danger)
+$primary-purple: #9333ea; // SuperAdmin
+
+// Role Aliases (for easier usage)
+$user-role: $primary-blue;
+$manager-role: $primary-green;
+$driver-role: $primary-amber;
+$admin-role: $primary-purple; // Setting Super Admin to Purple
+
+// Neutral Scale (Slate)
+$slate-900: #0f172a;
+$slate-800: #1e293b;
+$slate-700: #334155;
+$slate-600: #475569;
+$slate-500: #64748b;
+$slate-400: #94a3b8;
+$slate-300: #cbd5e1;
+$slate-200: #e2e8f0;
+$slate-100: #f1f5f9;
+$slate-50:  #f8fafc;
+$white:     #ffffff;
+
+// Semantic
+$text-main: $slate-800;
+$text-muted: $slate-500;
+$bg-light: $slate-50;
+$success: #10b981;
+$success-light: #d1fae5;
+$warning: #f59e0b;
+$warning-light: #fef3c7;
+$danger: #ef4444;
+$danger-light: #fee2e2;
+
+// Defaults
+$primary: $user-role;
+$primary-light: #eff6ff;
+$primary-dark: #2563eb;
+
+// --- Typography ---
+$font-family: 'Inter', sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+// --- Spacing ---
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-xxl: 32px;
+
+// --- Radius ---
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 9999px;
+
+// --- Shadows (Premium) ---
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+$shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+$shadow-premium-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+
+// --- Transitions ---
+$transition-base: all 0.2s ease-in-out;
+$transition-premium: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);

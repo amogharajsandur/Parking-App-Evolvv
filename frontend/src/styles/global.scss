@@ -8,82 +8,86 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: $bg-light;
+  background-color: #f1f5f9; // Neutral background for the workspace
   color: $text-main;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+
+  // Role backgrounds and theme colors
+  &.role-user { --role-primary: #{$user-role}; --role-secondary: #eff6ff; }
+  &.role-manager { --role-primary: #{$manager-role}; --role-secondary: #ecfdf5; }
+  &.role-driver { --role-primary: #{$driver-role}; --role-secondary: #fffbeb; }
+  &.role-admin { --role-primary: #{$admin-role}; --role-secondary: #f3e8ff; }
+}
+
+#root { width: 100%; }
+
+.emulator-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  height: 100vh;
+  padding: 20px;
+  width: 100%;
 }
 
 .app-container {
-  max-width: 480px;
-  margin: 0 auto;
-  min-height: 100vh;
+  width: 390px; // Slightly smaller for better fit
+  height: 844px; // iPhone 12/13/14 height
+  max-height: calc(100vh - 40px);
   background-color: $bg-light;
-  position: relative;
+  position: relative; // Crucial for absolute positioning of children
   display: flex;
   flex-direction: column;
+  border-radius: 48px; 
+  overflow: hidden;
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25), 0 0 0 12px #1e293b;
+  flex-shrink: 0;
+}
+
+.bottom-fixed-layer {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .main-content {
   flex: 1;
-  padding: $spacing-md;
-  padding-bottom: 100px; // Space for bottom nav
+  overflow-y: auto;
+  padding-bottom: 90px; // Space for bottom nav
+  position: relative;
+  
+  &::-webkit-scrollbar { display: none; }
 }
 
-// Typography
-h1 { font-size: 24px; font-weight: 700; color: $dark-navy; }
-h2 { font-size: 20px; font-weight: 600; color: $dark-navy; }
-h3 { font-size: 16px; font-weight: 600; }
-p { font-size: 14px; color: $text-muted; }
+// Fixed: Remove bottom padding for non-user roles as they don't have the bottom nav
+body:not(.role-user) .main-content {
+  padding-bottom: 0 !important;
+}
+
+.sidebar-emulator {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Typography Enhancements
+h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+h3 { font-size: 15px; font-weight: 600; }
+p { font-size: 13px; color: $text-muted; line-height: 1.5; }
 
 // Utility
-.card {
-  background: $white;
-  border-radius: $radius-lg;
-  padding: $spacing-md;
-  box-shadow: $shadow-sm;
-  margin-bottom: $spacing-md;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.badge {
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: capitalize;
-  
-  &.parked { background: $success-light; color: $success; }
-  &.retrieving { background: $warning-light; color: $warning; }
-  &.retrieved { background: $primary-light; color: $primary; }
-  &.pending { background: $danger-light; color: $danger; }
-  &.paid { background: $success-light; color: $success; }
-  &.unpaid { background: $danger-light; color: $danger; }
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-sm;
-  border-radius: $radius-md;
-  transition: $transition-base;
-  
-  &:hover { background: rgba(0, 0, 0, 0.05); }
-}
-
-button.primary {
-  background: $primary;
-  color: $white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: $radius-md;
-  font-weight: 600;
-  cursor: pointer;
-  transition: $transition-base;
-  
-  &:hover { background: $primary-dark; }
-}
+.w-full { width: 100%; }

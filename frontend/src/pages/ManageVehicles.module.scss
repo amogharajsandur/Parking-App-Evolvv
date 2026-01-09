@@ -1,0 +1,92 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.manageVehiclesPage {
+  @include container-base;
+
+  .pageHeader {
+    @include glass-header;
+    
+    .headerTop {
+      @include flex(flex-start, center, row, 16px);
+      margin-bottom: $spacing-md;
+
+      .backBtn {
+        @include back-button;
+      }
+
+      h1 { font-size: 20px; font-weight: 700; color: white; }
+    }
+
+    .summaryText {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .vehiclesList {
+    @include content-scroll;
+  }
+
+  .vehicleCard {
+    background: white;
+    margin-bottom: $spacing-md;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    box-shadow: $shadow-sm;
+
+    .cardBody {
+      padding: $spacing-lg;
+      @include flex(flex-start, center, row, 16px);
+
+      .vIcon {
+        width: 56px;
+        height: 56px;
+        background: var(--role-secondary, $primary-light);
+        border-radius: 16px;
+        @include flex;
+        color: var(--role-primary, $primary);
+        border: 1px solid rgba(0,0,0,0.03);
+      }
+
+      .vInfo {
+        flex: 1;
+        h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+        .plate { font-size: 13px; font-weight: 700; color: #64748b; font-family: 'JetBrains Mono', monospace; }
+        .owner { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+      }
+    }
+
+    .cardActions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #f8fafc;
+
+      .actionBtn {
+        background: none;
+        border: none;
+        padding: 14px;
+        @include flex(center, center, row, 8px);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: $transition-base;
+
+        &:first-child { border-right: 1px solid #f8fafc; }
+        
+        &.edit { color: #64748b; &:hover { background: #f8fafc; color: var(--role-primary, $primary); } }
+        &.remove { color: $danger; &:hover { background: $danger-light; } }
+        
+        &:active { background: rgba(0,0,0,0.02); }
+      }
+    }
+  }
+
+  .addVehicleBtn {
+    @include premium-button(var(--role-primary, $primary));
+    width: 100%;
+    margin-top: $spacing-md;
+    justify-content: center;
+  }
+}
