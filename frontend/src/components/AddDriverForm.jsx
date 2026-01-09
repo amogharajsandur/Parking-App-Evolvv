@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ArrowLeft, User, Phone, Mail, MapPin, Calendar, FileText } from 'lucide-react';
+import API_BASE_URL from '../config';
 import styles from './AddDriverForm.module.scss';
 
 const AddDriverForm = ({ onClose }) => {
@@ -18,7 +19,7 @@ const AddDriverForm = ({ onClose }) => {
 
       setIsSubmitting(true);
       try {
-          await axios.post('http://localhost:5001/api/drivers/request', {
+          await axios.post(`${API_BASE_URL}/drivers/request`, {
               name: formData.name,
               phone: formData.phone,
               license: formData.license,

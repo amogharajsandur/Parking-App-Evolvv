@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRole } from '../context/RoleContext';
 import { ArrowLeft, MapPin, ChevronDown, Ticket, Landmark, Database, Users, Building } from 'lucide-react';
+import API_BASE_URL from '../config';
 import styles from './SuperAdmin.module.scss';
 
 const SuperAdmin = () => {
@@ -28,7 +29,7 @@ const SuperAdmin = () => {
   useEffect(() => {
     const fetchStats = async () => {
        try {
-           const res = await axios.get('http://localhost:5001/api/sessions');
+           const res = await axios.get(`${API_BASE_URL}/sessions`);
            const sessions = res.data;
            
            // Filter by Site
@@ -79,7 +80,7 @@ const SuperAdmin = () => {
      if (activeTab === 'Approvals') {
         const fetchPending = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/api/drivers/pending');
+                const res = await axios.get(`${API_BASE_URL}/drivers/pending`);
                 setPendingDrivers(res.data);
             } catch (err) {
                 console.error("Failed to fetch pending drivers", err);
@@ -91,7 +92,7 @@ const SuperAdmin = () => {
 
   const handleApprove = async (id) => {
       try {
-          await axios.put(`http://localhost:5001/api/drivers/${id}/approve`);
+          await axios.put(`${API_BASE_URL}/drivers/${id}/approve`);
           setPendingDrivers(prev => prev.filter(d => d.id !== id));
           setViewDriver(null);
       } catch (err) {
@@ -101,7 +102,7 @@ const SuperAdmin = () => {
 
   const handleReject = async (id) => {
       try {
-          await axios.put(`http://localhost:5001/api/drivers/${id}/reject`);
+          await axios.put(`${API_BASE_URL}/drivers/${id}/reject`);
           setPendingDrivers(prev => prev.filter(d => d.id !== id));
           setViewDriver(null);
       } catch (err) {

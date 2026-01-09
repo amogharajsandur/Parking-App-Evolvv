@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRole } from '../context/RoleContext';
 import MetricCard from '../components/MetricCard';
 import AddDriverForm from '../components/AddDriverForm';
+import API_BASE_URL from '../config';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
@@ -24,7 +25,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/sessions');
+        const res = await axios.get(`${API_BASE_URL}/sessions`);
         setSessions(res.data);
         setLoading(false);
       } catch (error) {
