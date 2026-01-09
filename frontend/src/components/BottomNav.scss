@@ -1,0 +1,44 @@
+@import '../styles/variables';
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: 70px;
+  background: $white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0 10px;
+  z-index: 1000;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03);
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: $text-muted;
+    font-size: 11px;
+    font-weight: 500;
+    transition: $transition-base;
+    gap: 4px;
+
+    &.active {
+      color: $primary;
+      
+      svg {
+        stroke: $primary;
+        fill: rgba($primary, 0.1);
+      }
+    }
+
+    svg {
+      transition: $transition-base;
+    }
+  }
+}

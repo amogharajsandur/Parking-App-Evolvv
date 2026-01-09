@@ -1,0 +1,43 @@
+// Color Palette
+$primary: #4f46e5;
+$primary-dark: #4338ca;
+$primary-light: #e0e7ff;
+
+$secondary: #6d28d9;
+$secondary-light: #f5f3ff;
+
+$success: #10b981;
+$success-light: #d1fae5;
+
+$warning: #f59e0b;
+$warning-light: #fef3c7;
+
+$danger: #ef4444;
+$danger-light: #fee2e2;
+
+$dark-navy: #1e1b4b;
+$text-main: #111827;
+$text-muted: #6b7280;
+$bg-light: #f9fafb;
+$white: #ffffff;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Border Radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
