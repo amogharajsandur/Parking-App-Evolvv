@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const sessionRoutes = require('./routes/sessionRoutes');
 const driverRoutes = require('./routes/driverRoutes');
+const db = require('./config/db');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,8 +16,22 @@ setupMiddleware(app);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/drivers', driverRoutes);
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date() });
+app.get('/api/health', async (req, res) => {
+  try {
+    const dbCheck = await db.query('SELECT 1');
+    res.json({ 
+      status: 'ok', 
+      database: 'connected', 
+      timestamp: new Date() 
+    });
+  } catch (err) {
+    res.status(503).json({ 
+      status: 'degraded', 
+      database: 'error', 
+      error: err.message,
+      timestamp: new Date() 
+    });
+  }
 });
 
 app.get("/", (req, res)=>{
