@@ -41,6 +41,7 @@ The application implements a custom Context API-based role switching mechanism t
 
 /frontend
   ├── src/
+  │    ├── api/        # API configuration
   │    ├── components/ # Reusable UI components (Cards, Forms, Nav)
   │    ├── context/    # Role-based state management
   │    ├── pages/      # Role-specific views (Admin, Manager, User, Driver)
@@ -67,7 +68,7 @@ The system relies on a relational PostgreSQL structure to ensure data integrity:
 * Install dependencies: `npm install`
 * Create a `.env` file and add your credentials:
 ```Bash
-PORT=5001
+PORT=5000
 DATABASE_URL=your_postgresql_connection_string
 NODE_ENV=production
 ```
@@ -82,6 +83,8 @@ NODE_ENV=production
 * Frontend: Deployed on Vercel with environment variable mapping for `VITE_API_URL`.
 * Backend: Deployed on Render using a Web Service instance.
 * Database: PostgreSQL instance running on Supabase with SSL enabled for production security.
+
+---
 
 ### Author
 [Amogha Raj Sandur](https://www.linkedin.com/in/amogharajsandur/) Internship Assignment - Brandworks Technologies - Parking App Evolvv
