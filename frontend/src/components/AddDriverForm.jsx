@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ArrowLeft, User, Phone, Mail, MapPin, Calendar, FileText } from 'lucide-react';
-import API_BASE_URL from '../config';
+import API_BASE_URL from "../api/config";
 import styles from './AddDriverForm.module.scss';
 
 const AddDriverForm = ({ onClose }) => {

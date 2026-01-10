@@ -6,7 +6,7 @@ const sessionRoutes = require('./routes/sessionRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 
 // Middleware Setup
 setupMiddleware(app);

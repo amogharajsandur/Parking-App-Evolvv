@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRole } from '../../context/RoleContext';
 import { ArrowLeft, MapPin, ChevronDown, Ticket, Landmark, Database, Users, Building } from 'lucide-react';
-import API_BASE_URL from '../../config';
+import API_BASE_URL from "../../api/config";
 import styles from './SuperAdmin.module.scss';
 
 const SuperAdmin = () => {
