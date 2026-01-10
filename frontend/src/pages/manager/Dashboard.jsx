@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRole } from '../../context/RoleContext';
 import MetricCard from '../../components/MetricCard';
 import AddDriverForm from '../../components/AddDriverForm';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import API_BASE_URL from '../../api/config';
 import styles from './Dashboard.module.scss';
 
@@ -14,6 +15,7 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
   const [showAddDriver, setShowAddDriver] = useState(false);
+  const [comingSoon, setComingSoon] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -54,6 +56,13 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       {showAddDriver && <AddDriverForm onClose={() => setShowAddDriver(false)} />}
+      
+      {comingSoon && (
+        <ComingSoonModal 
+          featureName={comingSoon} 
+          onClose={() => setComingSoon(null)} 
+        />
+      )}
 
       <header className={styles.dashboardHeader}>
         <div className={styles.dashboardHeaderContent}>
@@ -92,7 +101,7 @@ const Dashboard = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <button className={styles.filterBtn} onClick={() => alert('Advanced filters')}>
+            <button className={styles.filterBtn} onClick={() => setComingSoon('Advanced Filters')}>
                <Filter size={18} />
             </button>
           </div>
@@ -141,7 +150,7 @@ const Dashboard = () => {
                   </div>
                   <div className={styles.rightAction}>
                      <div className={styles.time}>{new Date(session.entry_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                     <button className={styles.moreBtn}>
+                     <button className={styles.moreBtn} onClick={() => setComingSoon('Action Menu')}>
                         <MoreVertical size={16} />
                      </button>
                   </div>

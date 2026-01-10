@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRole } from '../../context/RoleContext';
 import { ArrowLeft, MapPin, ChevronDown, Ticket, Landmark, Database, Users, Building } from 'lucide-react';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import API_BASE_URL from "../../api/config";
 import styles from './SuperAdmin.module.scss';
 
@@ -11,6 +12,7 @@ const SuperAdmin = () => {
   const { setRole } = useRole();
   const [activeTab, setActiveTab] = useState('Overview');
   const [selectedSite, setSelectedSite] = useState('Phoenix Mall - Lower Parel');
+  const [comingSoon, setComingSoon] = useState(null);
   
   const [stats, setStats] = useState({
     todayTickets: 0,
@@ -32,18 +34,9 @@ const SuperAdmin = () => {
            const res = await axios.get(`${API_BASE_URL}/sessions`);
            const sessions = res.data;
            
-           // Filter by Site
-           const siteSessions = sessions.filter(s => {
-              if (!selectedSite) return true;
-              // Simple check: if mock data location string contains part of selected site
-              // Mapping 'Phoenix Mall - Lower Parel' -> 'Phoenix Mall'
-              // Mapping 'Inorbit Mall - Malad' -> 'Inorbit'
-              // This logic depends on mock data strings
-              const siteKey = selectedSite.split(' - ')[0]; // "Phoenix Mall" from "Phoenix Mall - Lower Parel"
-              return s.location.includes(siteKey);
-           });
+           const siteKey = selectedSite.split(' - ')[0];
+           const siteSessions = sessions.filter(s => s.location.includes(siteKey));
 
-           // Helper for "Today"
            const isToday = (dateString) => {
                const date = new Date(dateString);
                const today = new Date();
@@ -70,11 +63,10 @@ const SuperAdmin = () => {
        }
     };
     fetchStats();
-  }, [selectedSite]); // Re-run when site changes
+  }, [selectedSite]);
 
-  // Fetch Pending Drivers
   const [pendingDrivers, setPendingDrivers] = useState([]);
-  const [viewDriver, setViewDriver] = useState(null); // For modal
+  const [viewDriver, setViewDriver] = useState(null);
 
   useEffect(() => {
      if (activeTab === 'Approvals') {
@@ -112,6 +104,13 @@ const SuperAdmin = () => {
 
   return (
     <div className={styles.adminPage}>
+      {comingSoon && (
+        <ComingSoonModal 
+          featureName={comingSoon} 
+          onClose={() => setComingSoon(null)} 
+        />
+      )}
+
       {/* Driver Detail Modal */}
       {viewDriver && (
         <div className={styles.modalOverlay}>
@@ -168,7 +167,6 @@ const SuperAdmin = () => {
                              </div>
                          )}
                         <div className={styles.licenseImg}>
-                            {/* Placeholder for License Image */}
                              <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2680&auto=format&fit=crop" alt="License" />
                         </div>
                     </div>
@@ -249,7 +247,7 @@ const SuperAdmin = () => {
                     </div>
                     <h2>{stats.todayTickets}</h2>
                 </div>
-                <div className={styles.statCard}>
+                <div className={stats.todayCollection === '0' ? styles.statCard : `${styles.statCard} ${styles.hasRevenue}`}>
                     <div className={styles.cardHeader}>
                         <label>Collection</label>
                         <div className={styles.iconOpac}>
@@ -296,10 +294,10 @@ const SuperAdmin = () => {
 
         {activeTab === 'Approvals' && (
           <section className={styles.approvalsSection}>
-             <h3 style={{fontSize: '15px', fontWeight: '700', marginBottom: '16px', color: '#334155'}}>Pending Driver Approvals</h3>
+             <h3 className={styles.sectionTitle}>Pending Driver Approvals</h3>
              
              {pendingDrivers.map(driver => (
-                 <div key={driver.id} className={styles.approvalCard}>
+                  <div key={driver.id} className={styles.approvalCard}>
                     <div className={styles.cardTop}>
                         <div className={styles.avatar}>
                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="driver" />
@@ -307,7 +305,6 @@ const SuperAdmin = () => {
                         <div className={styles.info}>
                             <h4>{driver.name}</h4>
                             <div className={styles.metaRow}>
-                                {/* Placeholder icon if needed */}
                                 <span>{driver.phone}</span>
                             </div>
                              <div className={styles.metaRow}>
@@ -340,7 +337,7 @@ const SuperAdmin = () => {
                              Reject
                         </button>
                     </div>
-                 </div>
+                  </div>
              ))}
 
              {pendingDrivers.length === 0 && (
@@ -359,7 +356,7 @@ const SuperAdmin = () => {
                    <h4>Phoenix Mall</h4>
                    <p>Lower Parel, Mumbai</p>
                 </div>
-                <button className={styles.manageBtn}>Edit</button>
+                <button className={styles.manageBtn} onClick={() => setComingSoon('Site Editor')}>Edit</button>
              </div>
              
              <div className={styles.siteCard}>
@@ -370,7 +367,7 @@ const SuperAdmin = () => {
                    <h4>City Center Mall</h4>
                    <p>Bandra West, Mumbai</p>
                 </div>
-                <button className={styles.manageBtn}>Edit</button>
+                <button className={styles.manageBtn} onClick={() => setComingSoon('Site Editor')}>Edit</button>
              </div>
 
              <div className={styles.siteCard}>
@@ -381,9 +378,9 @@ const SuperAdmin = () => {
                    <h4>Orion Business Park</h4>
                    <p>Malad, Mumbai</p>
                 </div>
-                <button className={styles.manageBtn}>Edit</button>
+                <button className={styles.manageBtn} onClick={() => setComingSoon('Site Editor')}>Edit</button>
              </div>
-             <button className={styles.addBtn}>+ Add New Site</button>
+             <button className={styles.addBtn} onClick={() => setComingSoon('Add Site Form')}>+ Add New Site</button>
           </section>
         )}
       </div>

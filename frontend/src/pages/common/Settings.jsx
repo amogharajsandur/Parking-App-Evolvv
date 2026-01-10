@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   User, 
@@ -11,10 +11,12 @@ import {
   ArrowLeft,
   Car
 } from 'lucide-react';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import styles from './Settings.module.scss';
 
 const Settings = () => {
   const navigate = useNavigate();
+  const [comingSoon, setComingSoon] = useState(null);
 
   const settingsItems = [
     { 
@@ -29,21 +31,21 @@ const Settings = () => {
       title: 'Payment Methods', 
       desc: 'Manage your saved cards & UPI', 
       icon: CreditCard,
-      onClick: () => alert('Payment settings coming soon!')
+      onClick: () => setComingSoon('Payment Methods')
     },
     { 
       id: 'notifications', 
       title: 'Notifications', 
       desc: 'Configure alert preferences', 
       icon: Bell,
-      onClick: () => alert('Notification settings coming soon!')
+      onClick: () => setComingSoon('Notifications')
     },
     { 
       id: 'security', 
       title: 'Security', 
       desc: 'Password and account safety', 
       icon: Shield,
-      onClick: () => alert('Security settings coming soon!')
+      onClick: () => setComingSoon('Security')
     },
     { 
       id: 'faq', 
@@ -56,6 +58,13 @@ const Settings = () => {
 
   return (
     <div className={styles.settingsPage}>
+      {comingSoon && (
+        <ComingSoonModal 
+          featureName={comingSoon} 
+          onClose={() => setComingSoon(null)} 
+        />
+      )}
+      
       <header className={styles.settingsHeader}>
         <div className={styles.headerTop}>
           <button className={styles.backBtn} onClick={() => navigate('/')}>
@@ -93,7 +102,7 @@ const Settings = () => {
           ))}
         </div>
 
-        <button className={styles.logoutBtn} onClick={() => alert('Logging out...')}>
+        <button className={styles.logoutBtn} onClick={() => setComingSoon('Logout Feature')}>
           <LogOut size={20} />
           <span>Logout</span>
         </button>

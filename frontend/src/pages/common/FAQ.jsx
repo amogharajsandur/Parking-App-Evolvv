@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, HelpCircle, ChevronDown, Edit2, Shield, CreditCard, Clock } from 'lucide-react';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import styles from './FAQ.module.scss';
 
 const FAQ = () => {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(null);
+  const [comingSoon, setComingSoon] = useState(null);
 
   const faqs = [
     { 
@@ -32,6 +34,13 @@ const FAQ = () => {
 
   return (
     <div className={styles.faqPage}>
+      {comingSoon && (
+        <ComingSoonModal 
+          featureName={comingSoon} 
+          onClose={() => setComingSoon(null)} 
+        />
+      )}
+
       <header className={styles.pageHeader}>
         <div className={styles.headerTop}>
           <button className={styles.backBtn} onClick={() => navigate('/settings')}>
@@ -49,7 +58,7 @@ const FAQ = () => {
             <h3>John Doe</h3>
             <p>+91 98765 43210</p>
           </div>
-          <button className={styles.editBtn} onClick={() => alert('Edit Profile')}>
+          <button className={styles.editBtn} onClick={() => setComingSoon('Edit Profile')}>
             <Edit2 size={18} />
           </button>
         </div>

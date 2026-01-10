@@ -9,18 +9,34 @@ let mockDrivers = [
 let mockPendingDrivers = [
   { 
     id: '101', 
-    name: 'qwertyui', 
-    phone: 'wzaesxdrcftvgybhunj', 
-    license: '1243t52yu36i47juyethrgsefa', 
+    name: 'Sanjeev Nair', 
+    phone: '+91 91234 56789', 
+    license: 'DL-MH-01-2019-10293', 
     submittedBy: 'Manager', 
     submittedOn: '2026-01-09',
     status: 'pending',
     site: 'Phoenix Mall - Lower Parel',
     details: {
-       email: 'xrdctfvygbuhnijm@qwere.1232ef',
-       address: 'df ibefnover',
-       dob: '2000-04-01',
-       expiry: '0045-11-23'
+       email: 'sanjeev.nair@example.com',
+       address: 'HSR Layout, Bangalore',
+       dob: '1992-05-15',
+       expiry: '2034-12-31'
+    }
+  },
+  { 
+    id: '102', 
+    name: 'Vikram Singh', 
+    phone: '+91 92345 67890', 
+    license: 'DL-MH-05-2020-45678', 
+    submittedBy: 'Admin', 
+    submittedOn: '2026-01-10',
+    status: 'pending',
+    site: 'Inorbit Mall - Malad',
+    details: {
+       email: 'vikram.s@example.com',
+       address: 'Malad West, Mumbai',
+       dob: '1988-11-22',
+       expiry: '2030-01-01'
     }
   }
 ];

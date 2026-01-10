@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ArrowLeft, User, Phone, Mail, MapPin, Calendar, FileText } from 'lucide-react';
 import API_BASE_URL from "../api/config";
+import StatusModal from './StatusModal';
 import styles from './AddDriverForm.module.scss';
 
 const AddDriverForm = ({ onClose }) => {
@@ -9,11 +10,16 @@ const AddDriverForm = ({ onClose }) => {
       name: '', phone: '', email: '', address: '', dob: '', license: '', expiry: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modal, setModal] = useState(null);
 
   const handleSubmit = async () => {
       // Basic validation
       if (!formData.name || !formData.phone || !formData.license) {
-          alert("Please fill required fields (Name, Phone, License)");
+          setModal({
+              type: 'error',
+              title: 'Missing Info',
+              message: 'Please fill required fields (Name, Phone, License)'
+          });
           return;
       }
 
@@ -30,11 +36,19 @@ const AddDriverForm = ({ onClose }) => {
                   expiry: formData.expiry
               }
           });
-          alert('Driver Request Sent to Super Admin!');
-          onClose(); // Close the form
+          setModal({
+              type: 'success',
+              title: 'Request Sent',
+              message: 'Driver Request has been sent to Super Admin for approval.',
+              onClose: () => onClose()
+          });
       } catch (err) {
           console.error("Failed to add driver", err);
-          alert("Failed to submit request.");
+          setModal({
+              type: 'error',
+              title: 'Submission Failed',
+              message: 'We could not process your request at this time.'
+          });
       } finally {
           setIsSubmitting(false);
       }
@@ -42,6 +56,18 @@ const AddDriverForm = ({ onClose }) => {
 
   return (
     <div className={styles.addDriverPage}>
+      {modal && (
+        <StatusModal 
+            type={modal.type}
+            title={modal.title}
+            message={modal.message}
+            onClose={() => {
+                if (modal.onClose) modal.onClose();
+                setModal(null);
+            }}
+        />
+      )}
+
       <header className={styles.header}>
         <div className={styles.topRow}>
           <button className={styles.backBtn} onClick={onClose}>

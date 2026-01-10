@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Car, Plus, Edit2, Trash2, Shield } from 'lucide-react';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import styles from './ManageVehicles.module.scss';
 
 const ManageVehicles = () => {
   const navigate = useNavigate();
+  const [comingSoon, setComingSoon] = useState(null);
   const [vehicles, setVehicles] = useState([
     { id: 1, name: 'Toyota Camry', plate: 'MH 12 AB 1234', owner: 'John Doe' },
     { id: 2, name: 'Honda City', plate: 'MH 14 CD 5678', owner: 'John Doe' },
@@ -17,15 +19,18 @@ const ManageVehicles = () => {
   };
 
   const handleAddVehicle = () => {
-    const name = prompt('Enter Vehicle Name:');
-    const plate = prompt('Enter Plate Number:');
-    if (name && plate) {
-      setVehicles([...vehicles, { id: Date.now(), name, plate, owner: 'John Doe' }]);
-    }
+    setComingSoon('Add Vehicle Form');
   };
 
   return (
     <div className={styles.manageVehiclesPage}>
+      {comingSoon && (
+        <ComingSoonModal 
+          featureName={comingSoon} 
+          onClose={() => setComingSoon(null)} 
+        />
+      )}
+
       <header className={styles.pageHeader}>
         <div className={styles.headerTop}>
           <button className={styles.backBtn} onClick={() => navigate('/settings')}>
@@ -50,7 +55,7 @@ const ManageVehicles = () => {
               </div>
             </div>
             <div className={styles.cardActions}>
-              <button className={`${styles.actionBtn} ${styles.edit}`} onClick={() => alert(`Edit ${v.name}`)}>
+              <button className={`${styles.actionBtn} ${styles.edit}`} onClick={() => setComingSoon(`Edit ${v.name}`)}>
                 <Edit2 size={16} /> Edit
               </button>
               <button className={`${styles.actionBtn} ${styles.remove}`} onClick={() => handleDelete(v.id)}>
